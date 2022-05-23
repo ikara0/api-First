@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "473b3284-bab9-43e3-8a3c-2c668eb2e1d9",
+		"name": "FirstApiConnection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7273/api/Supplier/delete/32",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/Supplier/delete/32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"Supplier",
+						"delete",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/Supplier/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"companyName\": \"string\",\r\n  \"contactName\": \"string\",\r\n  \"contactTitle\": \"string\",\r\n  \"address\": \"string\",\r\n  \"city\": \"string\",\r\n  \"region\": \"string\",\r\n  \"postalCode\": \"string\",\r\n  \"country\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"fax\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7273/api/Supplier/add",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"Supplier",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/Supplier/list?count=15&page=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/Supplier/list?count=15&page=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"Supplier",
+						"list"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "15"
+						},
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/Supplier/get/32",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/Supplier/get/32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"Supplier",
+						"get",
+						"32"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

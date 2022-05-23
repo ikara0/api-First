@@ -1,7 +1,5 @@
 using BilgeAdam.Common;
 using BilgeAdam.Data.Context;
-using BilgeAdam.Services.Abstractions;
-using BilgeAdam.Services.Concretes;
 using BilgeAdam.Services.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +14,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 //DbContext
 
 builder.Services.AddDbContext<NorthwindDbContext>(options =>
@@ -24,11 +21,11 @@ builder.Services.AddDbContext<NorthwindDbContext>(options =>
     options.UseSqlServer(settings.Database.ConnectionString);
 });
 
-// Data Services 
+builder.Services.AddCors(option => { option.AddPolicy("all", p => { p.AllowAnyOrigin().AllowAnyHeader(); }); });
+
+// Data Services
 
 builder.Services.AddDataServices();
-
-
 
 var app = builder.Build();
 
@@ -40,7 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("all");
 app.MapControllers();
 
 app.Run();

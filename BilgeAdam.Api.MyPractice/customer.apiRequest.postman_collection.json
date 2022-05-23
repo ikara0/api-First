@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "ce22ae66-545d-4d40-aef2-f4e8a65be330",
+		"name": "customer.apiRequest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7273/api/customer/get/strin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/customer/get/strin",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"customer",
+						"get",
+						"strin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/customer/customer-list?count=15&page=7",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/customer/customer-list?count=15&page=7",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"customer",
+						"customer-list"
+					],
+					"query": [
+						{
+							"key": "count",
+							"value": "15"
+						},
+						{
+							"key": "page",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/customer/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerId\": \"IKARA\",\r\n  \"companyName\": \"CRK AS\",\r\n  \"contactName\": \"Ismail Kara\",\r\n  \"contactTitle\": \"CTO\",\r\n  \"address\": \"NushetEfendi sk.\",\r\n  \"city\": \"Istanbul\",\r\n  \"region\": \"EAST\",\r\n  \"postalCode\": \"34734\",\r\n  \"country\": \"TURKEY\",\r\n  \"phone\": \"5522430058\",\r\n  \"fax\": \"346713072\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7273/api/customer/add",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"customer",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/Customer/delete/strin",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7273/api/Customer/delete/strin",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"Customer",
+						"delete",
+						"strin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7273/api/Customer/update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"strin\",\r\n  \"companyName\": \"selam\",\r\n  \"contactName\": \"naber\",\r\n  \"contactTitle\": \"nasılsın\",\r\n  \"address\": \"burnun\",\r\n  \"postalCode\": \"Kapıya\",\r\n  \"country\": \"kısılsın\",\r\n  \"city\": \"string\",\r\n  \"region\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"fax\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7273/api/Customer/update",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7273",
+					"path": [
+						"api",
+						"Customer",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
