@@ -1,4 +1,5 @@
 ﻿using BilgeAdam.Common.Dtos;
+using BilgeAdam.Common.Dtos.Customer;
 using System.Text.Json;
 
 namespace BilgeAdam.ConsoleApp.ForApi
@@ -7,6 +8,7 @@ namespace BilgeAdam.ConsoleApp.ForApi
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Supplier list");
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:7273");
@@ -23,7 +25,25 @@ namespace BilgeAdam.ConsoleApp.ForApi
                     }
                 }
             }
-            Console.Read();
+            Console.WriteLine("Customer list");
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:7273");
+                var response = client.GetAsync("api/customer/customer-list?count=10&page=1").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResult = response.Content?.ReadAsStringAsync().Result;
+                    var result = JsonSerializer.Deserialize<PagedList<List<CustomerListDto>>>(jsonResult);
+                    foreach (var item in result.Data)
+                    {
+                        Console.WriteLine($"{item.CompanyName}-{item.ContactName}");
+                        Console.WriteLine();
+                    }
+                }
+            }
+
+
+            Console.ReadLine();
         }
     }
 }
