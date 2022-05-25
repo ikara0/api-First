@@ -26,6 +26,7 @@
         </button>
       </li>
     </ul>
+    <hr />
     <div class="tab-content" id="pills-tabContent">
       <div
         class="tab-pane fade show active"
