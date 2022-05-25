@@ -59,6 +59,14 @@
         </form>
       </div>
       <div class="col-7">
+        <select v-model="selected">
+          <option
+            v-for="count in counts"
+            v-bind:value="{ id: count.id, text: count.value }"
+          >
+            {{ count.value }}
+          </option>
+        </select>
         <table class="table table-dark table-striped">
           <thead>
             <tr>
@@ -99,7 +107,12 @@ export default {
     return {
       supplierData: null,
       page: 1,
-      count: 10,
+      counts: [
+        { id: 10, value: 10 },
+        { id: 15, value: 15 },
+        { id: 20, value: 20 },
+      ],
+      selected: "",
     };
   },
   mounted() {
@@ -109,7 +122,7 @@ export default {
     loadSupplier() {
       axios
         .get(
-          `https://localhost:7273/api/Supplier/list?count=${this.count}&page=${this.page}`
+          `https://localhost:7273/api/Supplier/list?count=${this.selected.id}&page=${this.page}`
         )
         .then((response) => {
           this.supplierData = response.data.data;
@@ -125,24 +138,19 @@ export default {
     },
     save() {
       let newSupplier = {
-        companyName: "#companyName".val(),
-        contactName: "#contactName".val(),
-        city: "#city".val(),
-        country: "#country".val(),
-        phone: "#phone".val(),
+        companyName: $("#companyName").val(),
+        contactName: $("#contactName").val(),
+        city: $("#city").val(),
+        country: $("#country").val(),
+        phone: $("#phone").val(),
       };
-      $.ajax({
-        url: `https://localhost:7273/api/Supplier/add`,
-        contentType: "application/json",
-        type: "PUT",
-        data: JSON.stringify(newSupplier),
-        success: (data) => {
-          console.log(data);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
+
+      fetch(`https://localhost:7273/api/Supplier/add`, {
+        method: "POST",
+        body: JSON.stringify(newSupplier),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     },
   },
   computed: {
