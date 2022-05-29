@@ -1,5 +1,5 @@
 <template>
-  <div id="tblCustomer" class="container">
+  <div id="tblCustomer" class="container mt-3">
     <div>
       <table class="table table-dark table-striped">
         <thead>
@@ -7,6 +7,7 @@
             <th scope="col">#</th>
             <th scope="col">Şirket Adı</th>
             <th scope="col">Temsilci Adı</th>
+            <th scope="col">Adres</th>
             <th scope="col">Telefon</th>
           </tr>
         </thead>
@@ -15,17 +16,28 @@
             <td>{{ item.id }}</td>
             <td>{{ item.companyName }}</td>
             <td>{{ item.contactName }}</td>
+            <td>{{ item.address }}</td>
             <td>{{ item.phone }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="container">
-    <button @click="previous" class="btn btn-primary me-2" v-if="canDecrease">
-      Previous
+  <div class="d-flex justify-content-center">
+    <button
+      @click="previous"
+      class="btn btn-outline-info m-1"
+      :disabled="page <= 1"
+    >
+      <i class="bi bi-arrow-left"></i>
     </button>
-    <button @click="next" class="btn btn-primary">Next</button>
+    <button
+      @click="next"
+      class="btn btn-outline-info m-1"
+      :disabled="totalCount <= 0"
+    >
+      <i class="bi bi-arrow-right"></i>
+    </button>
   </div>
 </template>
 
@@ -37,6 +49,7 @@ export default {
       customerData: null,
       page: 1,
       count: 10,
+      totalCount: 0,
     };
   },
   mounted() {
@@ -50,6 +63,7 @@ export default {
         )
         .then((response) => {
           this.customerData = response.data.data;
+          this.totalCount = response.data.totalCount;
         });
     },
     next() {
@@ -59,11 +73,6 @@ export default {
     previous() {
       this.page--;
       this.loadCustomer();
-    },
-  },
-  computed: {
-    canDecrease() {
-      return this.page > 1;
     },
   },
 };
