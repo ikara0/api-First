@@ -30,6 +30,7 @@
             <th scope="col">Adres</th>
             <th scope="col">Telefon</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +45,13 @@
                 @click="deleteSupplier(item.id)"
                 class="btn btn-sm btn-outline-danger"
                 ><i class="bi bi-trash"></i
+              ></a>
+            </td>
+            <td>
+              <a
+                @click="updateSupplier(item.id)"
+                class="btn btn-sm btn-outline-warning"
+                ><i class="bi bi-pen"></i
               ></a>
             </td>
           </tr>
@@ -67,14 +75,19 @@
       </button>
     </div>
   </div>
-  <CreateSupplier ref="createModal" @success="save" />
-  <DeleteConfirm ref="deleteModal" @yes="deleteOk" />
+  <div>
+    <DeleteConfirm ref="deleteModal" @yes="deleteOk" />
+    <CreateSupplier ref="createModal" @success="save" />
+    <UpdateSupplier ref="updateModal" />
+  </div>
+  <div></div>
 </template>
 
 <script>
 import axios from "axios";
 import CreateSupplier from "../src/components/modals/CreateSupplier.vue";
 import DeleteConfirm from "../views/confirm/DeleteConfirm.vue";
+import UpdateSupplier from "../src/components/modals/UpdateSupplier.vue";
 export default {
   name: "Supplier",
   data() {
@@ -95,6 +108,7 @@ export default {
   components: {
     CreateSupplier,
     DeleteConfirm,
+    UpdateSupplier,
   },
   methods: {
     loadSupplier() {
@@ -140,6 +154,10 @@ export default {
             this.isFailed = false;
           }, 4000);
         });
+    },
+    updateSupplier(id) {
+      this.selectedId = id;
+      this.$refs.updateModal.open(this.selectedId);
     },
     next() {
       this.page++;

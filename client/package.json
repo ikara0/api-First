@@ -11,6 +11,7 @@
     "axios": "0.27.2",
     "bootstrap-icons": "^1.8.3",
     "vue": "^3.2.25",
+    "vue-float-label": "^1.6.1",
     "vue-router": "^4.0.15"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@ builder.Services.AddDbContext<NorthwindDbContext>(options =>
     options.UseSqlServer(settings.Database.ConnectionString);
 });
 
-builder.Services.AddCors(option => { option.AddPolicy("all", p => { p.AllowAnyOrigin().AllowAnyHeader(); }); });
+builder.Services.AddCors(option => { option.AddPolicy("all", p => {p.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader(); }); });
 
 // Data Services
 

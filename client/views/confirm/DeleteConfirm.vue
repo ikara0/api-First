@@ -1,15 +1,15 @@
 <template>
   <div
     class="modal fade"
-    id="exampleModal"
+    id="deleteModal"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    aria-labelledby="deleteModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Danger Zone!</h5>
+          <h5 class="modal-title" id="deleteModalLabel">Danger Zone!</h5>
           <button
             type="button"
             class="btn-close"
@@ -44,9 +44,7 @@ export default {
     };
   },
   mounted() {
-    this.instance = new bootstrap.Modal(
-      document.getElementById("exampleModal")
-    );
+    this.instance = new bootstrap.Modal(document.getElementById("deleteModal"));
   },
   methods: {
     confirm() {
@@ -59,5 +57,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

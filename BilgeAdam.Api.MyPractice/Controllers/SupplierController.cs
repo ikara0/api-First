@@ -1,4 +1,5 @@
 ﻿using BilgeAdam.Common.Dtos;
+using BilgeAdam.Common.Dtos.Supplier;
 using BilgeAdam.Services.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,19 @@ namespace BilgeAdam.Api.MyPractice.Controllers
             else
             {
                 return BadRequest("Bu Id de veri bulunamadı!");
+            }
+        }
+        [HttpPost("update")]
+        public IActionResult UpdateSupplier([FromBody] SupplierUpdateDto dto)
+        {
+            var result = service.UpdateSupplier(dto);
+            if (result)
+            {
+                return Ok("İşlem Başarılı");
+            }
+            else
+            {
+                return BadRequest("İşlem Başarısız");
             }
         }
     }

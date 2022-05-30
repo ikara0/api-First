@@ -1,4 +1,5 @@
 ﻿using BilgeAdam.Common.Dtos;
+using BilgeAdam.Common.Dtos.Supplier;
 using BilgeAdam.Data.Context;
 using BilgeAdam.Data.Entities;
 using BilgeAdam.Services.Abstractions;
@@ -46,7 +47,6 @@ namespace BilgeAdam.Services.Concretes
 
         public PagedList<List<SupplierListDto>> GetPagedSuppliers(int count, int page)
         {
-
             var data = dbContext.Suppliers.Skip((page - 1) * count).Take(count).Select(x => new SupplierListDto
             {
                 SupplierID = x.SupplierID,
@@ -67,12 +67,34 @@ namespace BilgeAdam.Services.Concretes
         {
             return dbContext.Suppliers.Where(x => x.SupplierID == id).Select(x => new SupplierDto
             {
+                Country = x.Country,
+                City = x.City,
                 Address = x.Address,
                 CompanyName = x.CompanyName,
                 ContactName = x.ContactName,
                 Fax = x.Fax,
                 Phone = x.Phone,
+                Region = x.Region,
             }).SingleOrDefault();
+        }
+
+        public bool UpdateSupplier(SupplierUpdateDto dto)
+        {
+            var data = dbContext.Suppliers.Where(s => s.SupplierID == dto.Id).FirstOrDefault();
+            if (data is null)
+            {
+                return false;
+            }
+            data.CompanyName = dto.CompanyName;
+            data.ContactName = dto.ContactName;
+            data.Address= dto.Address;
+            data.City = dto.City;
+            data.Address = dto.Address;
+            data.Country = dto.Country;
+            data.Phone=dto.Phone;
+            dbContext.Update(data);
+
+            return dbContext.SaveChanges() > 0;
         }
     }
 }

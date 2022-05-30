@@ -1,16 +1,16 @@
 <template>
   <div
     class="modal fade"
-    id="confirmModal"
+    id="updateModal"
     tabindex="-1"
-    aria-labelledby="confirmModalLabel"
+    aria-labelledby="updateModalLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="confirmModalLabel">
-            Tedarikçi Ekleme Paneli
+          <h5 class="modal-title" id="updateModalLabel">
+            Tedarikçi Güncelleme Paneli
           </h5>
           <button
             type="button"
@@ -29,7 +29,6 @@
                 type="text"
                 class="form-control"
                 id="companyName"
-                placeholder="Company Name"
                 name="companyName"
                 v-model="companyName"
                 required
@@ -123,7 +122,7 @@
 import axios from "axios";
 export default {
   emits: ["success"],
-  name: "CreateSupplier",
+  name: "UpdateSupplier",
   data() {
     return {
       instance: null,
@@ -135,21 +134,41 @@ export default {
       address: null,
       region: null,
       hasError: false,
+      selectedId: null,
     };
   },
   mounted() {
-    this.instance = new bootstrap.Modal(
-      document.getElementById("confirmModal")
-    );
+    this.instance = new bootstrap.Modal(document.getElementById("updateModal"));
+  },
+  components: {
+    // FloatLabel,
   },
   methods: {
-    open() {
+    open(id) {
       this.hasError = false;
+      this.selectedId = id;
+      axios
+        .get(`https://localhost:7273/api/Supplier/get/${this.selectedId}`)
+        .then((data) => {
+          if (data.data) {
+            this.companyName = data.data.companyName;
+            this.contactName = data.data.contactName;
+            this.country = data.data.country;
+            this.city = data.data.city;
+            this.phone = data.data.phone;
+            this.address = data.data.address;
+            this.region = data.data.region;
+          }
+        })
+        .catch(() => {
+          this.hasError = true;
+        });
       this.instance.show();
     },
     save() {
       this.hasError = false;
-      let newSupplier = {
+      let updateSupplier = {
+        id: this.selectedId,
         companyName: this.companyName,
         contactName: this.contactName,
         city: this.city,
@@ -159,9 +178,9 @@ export default {
         region: this.region,
       };
       axios
-        .post(`https://localhost:7273/api/Supplier/add`, newSupplier)
-        .then((data) => {
-          if (data.data) {
+        .post(`https://localhost:7273/api/Supplier/update`, updateSupplier)
+        .then((response) => {
+          if (response.data) {
             this.instance.hide();
             this.$emit("success");
           }

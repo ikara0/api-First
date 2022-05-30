@@ -1,4 +1,5 @@
 ﻿using BilgeAdam.Common.Dtos;
+using BilgeAdam.Common.Dtos.Supplier;
 
 namespace BilgeAdam.Services.Abstractions
 {
@@ -8,5 +9,6 @@ namespace BilgeAdam.Services.Abstractions
         SupplierDto GetSupplierById(int id);
         bool AddNewSupplier(SupplierAddDto dto);
         bool DeleteSupplierById(int id);
+        bool UpdateSupplier(SupplierUpdateDto dto);
     }
 }
